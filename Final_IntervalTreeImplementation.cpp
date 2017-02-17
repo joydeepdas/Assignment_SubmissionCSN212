@@ -1,3 +1,10 @@
+/*
+	Joydeep Das
+	14116032,3rd Year ECE
+	Tutorial 3: Implementation of Interval Tree (insertion, search) using BST.
+	
+*/
+
 #include <iostream>
 using namespace std;
  
