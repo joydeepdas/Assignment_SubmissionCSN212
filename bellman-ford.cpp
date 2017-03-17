@@ -33,7 +33,7 @@ struct Graph* createGraph(int V, int E)
     return graph;
 }
 //print function
-void printArr(int dist[], int n)
+void print_distances(int dist[], int n)
 {
     cout<< "Vertex number   Distance from Source"<<endl;
     for (int i = 0; i < n; ++i)
@@ -79,7 +79,7 @@ void BellmanFord_shorstestpath (struct Graph* graph, int source)
     }
     
  	if(negative_cycle==false){
-    	printArr(dist, V);
+    	print_distances(dist, V);
     }
  
     return;
