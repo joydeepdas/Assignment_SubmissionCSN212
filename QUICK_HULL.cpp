@@ -176,6 +176,39 @@ vector<point> QuickHull( point array[], int n){
 	return answer;
 	
 }
+int dist( point p, point q){
+	
+	int distance= (p.x-q.x)*(p.x-q.x)+(p.y-q.y)*(p.y-q.y);
+	return distance;
+}
+
+// helper function to quicksort for sorting w.r.t reference elements
+point p;
+int my_sort( const void *p1, const void *p2){
+	point *x= (point *)p1;
+	point *y= (point *)p2;
+	
+	int ans= orientation(p,*x,*y);
+	
+	if ( ans ==0){
+		if ( dist(p,*y)>= dist(p,*x)){
+			return -1;
+		}
+		else return 1;
+	}
+	
+	else if( ans==2){
+		return -1;
+	}
+	
+	else
+	{
+		return 1;
+	}
+	
+	
+}
+
 
 int main(){
 	// reading input from user
@@ -196,10 +229,22 @@ int main(){
 	
 	 point  array[] = {{0, 3}, {2, 2}, {1, 1}, {5, 1}, {3, 0}, {1, 0}, {3, 6}};
 	 int n=sizeof(array)/sizeof(array[0]);
-
+	
+	clock_t t1,t2;
+    t1=clock();
 
 	vector<point> answer=QuickHull(array,n);
 	
+	
+	// arrange the points in clockwise or anticlockwise with starting as a refernce
+	// sort all other points with reference to this minm point
+	p=answer[0];
+	
+	
+	// quick-sort
+	qsort(&answer[1], answer.size()-1, sizeof(point),my_sort);
+	
+	t2=clock();
 	//display result
 	cout<<" The Convex Hull points obtaines are: "<<endl;
 	for ( int i=0;i<answer.size();i++){
@@ -207,6 +252,12 @@ int main(){
 	}
 	
 	
+	
+	float diff=((float)t2-(float)t1);
+	float seconds = diff / CLOCKS_PER_SEC;	
+	cout<<"clocks_per_sec--> "<<CLOCKS_PER_SEC<<endl;
+	cout<<"clock_ticks--> "<<diff<<endl;
+    cout<<"RUNNNING TIME --> "<<seconds<<endl;
 	// Time Complexity O(nlogn).
 	// In average case better than GRAHAM_SCAN AND GIFT_WRAP
 }
