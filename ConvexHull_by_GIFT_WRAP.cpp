@@ -92,13 +92,23 @@ int main(){
 	 point  array[] = {{0, 3}, {2, 2}, {1, 1}, {5, 1}, {3, 0}, {1, 0}, {3, 6}};
 	 int n=sizeof(array)/sizeof(array[0]);
 
+	clock_t t1,t2;
+    t1=clock();
 
 	vector<point> answer=ConvexHull(array,n);
 	
+	t2=clock();
+    
 	//display result
 	for ( int i=0;i<answer.size();i++){
 		cout<<"( " << answer[i].x << " , " << answer[i].y<< " )"<<endl;
 	}
+	
+	float diff=((float)t2-(float)t1);
+	float seconds = diff / CLOCKS_PER_SEC;	
+	cout<<"clocks_per_sec--> "<<CLOCKS_PER_SEC<<endl;
+	cout<<"clock_ticks--> "<<diff<<endl;
+    cout<<"RUNNNING TIME --> "<<seconds<<endl;
 	
 	// Time Complexity is O(n^2)
 	
